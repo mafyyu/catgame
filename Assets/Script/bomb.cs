@@ -23,7 +23,7 @@ public class bomb : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.5f);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.tag == "Enemy")
+            if (collider.tag == "Enemy" || collider.tag == "Block")
             {
                 Destroy(collider.gameObject);
             }
