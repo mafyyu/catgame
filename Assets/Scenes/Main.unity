@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 143556190}
   - component: {fileID: 143556191}
   - component: {fileID: 143556192}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,6 +607,7 @@ MonoBehaviour:
   _hp: 5
   _damageTime: 3
   _flashTime: 0.1
+  bombPrefab: {fileID: 8061811615982601486, guid: 232122707e1eb4330910e54c66895b32, type: 3}
 --- !u!95 &143556190
 Animator:
   serializedVersion: 5
@@ -1640,7 +1641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shakeTime: 0.25
   _shakeMagnitude: 0.25
-  scrollSpeed: 0
+  scrollSpeed: 1
 --- !u!1 &585454604
 GameObject:
   m_ObjectHideFlags: 0
