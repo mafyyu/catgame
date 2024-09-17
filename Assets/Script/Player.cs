@@ -71,6 +71,7 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
         
+        Throw();
     }
 
 
@@ -170,5 +171,20 @@ public class Player : MonoBehaviour
     public int GetHP()
     {
         return _hp; //_hpの値を返す
+    }
+
+    public GameObject bombPrefab; // プレハブを保持する公開フィールド
+
+    private void Throw()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // プレイヤーの位置に投げるオブジェクトを生成
+                GameObject instantiatedBomb = Instantiate(bombPrefab);
+                instantiatedBomb.transform.position = transform.position;
+                Rigidbody2D bombRigid = instantiatedBomb.GetComponent<Rigidbody2D>();
+                Vector2 force = new Vector2(5.0f, 5.0f);
+                bombRigid.AddForce(force, ForceMode2D.Impulse);
+       }
     }
 }
