@@ -7,7 +7,7 @@ public class ExplosionControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke(nameof(DestroyExplosion), 0.4f);
+        Invoke(nameof(DestroyExplosion), 0.5f);
     }
 
     void DestroyExplosion()
