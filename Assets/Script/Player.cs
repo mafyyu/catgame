@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
             enabled = false; //playerのスクリプトを無効にする
             GetComponent<PlayerInput>().enabled = false; //PlayerInputのスクリプトを無効にする
             _cameraManager.scrollSpeed = 0.0f; 
+            SceneManager.LoadScene("Title"); // タイトルシーンに戻る
         }
     }
 
