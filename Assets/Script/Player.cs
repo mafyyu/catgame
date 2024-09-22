@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
         {
             _cameraManager.scrollSpeed = 0.0f; 
             Destroy(gameObject); //playerを消す
+            
         }
 
         float currentScrollSpeed = _cameraManager.scrollSpeed;
@@ -102,8 +103,7 @@ public class Player : MonoBehaviour
             FindObjectOfType<MainManager>()._ShowGameClearUI(); //MainManagerの_ShowGameClearUIメソッドを実行
             enabled = false; //playerのスクリプトを無効にする
             GetComponent<PlayerInput>().enabled = false; //PlayerInputのスクリプトを無効にする
-            _cameraManager.scrollSpeed = 0.0f; 
-            SceneManager.LoadScene("Title"); // タイトルシーンに戻る
+            _cameraManager.scrollSpeed = 0.0f;
         }
     }
 
@@ -150,6 +150,7 @@ public class Player : MonoBehaviour
         {
             _cameraManager.scrollSpeed = 0.0f; 
             Destroy(gameObject); //playerを消す
+            SceneManager.LoadScene("Title");
         }
     }
 
