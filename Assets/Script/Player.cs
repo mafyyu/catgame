@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
 
     private CameraManager _cameraManager; // CameraManagerのインスタンスを格納する変数
 
-    private int count;
+    [SerializeField, Header("爆弾の個数")]
+
+    public int count;
 
     // Start is called before the first frame update
     void Start() //ゲームスタート時に１度だけ実行される
@@ -47,8 +49,6 @@ public class Player : MonoBehaviour
         {
             _leftEdge = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x; // 画面左端の位置を計算
         }
-
-        count = 5;
     }
 
     // Update is called once per frame
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) //playerが何かにぶつかった時に実行される
     {
-        if (collision.gameObject.tag == "Floor") //playerが床にぶつかった時
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Block") //playerが床にぶつかった時
         {
             _bJump = false; //ジャンプしていない状態にする
         }
