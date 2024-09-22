@@ -2780,7 +2780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverUI: {fileID: 740399821}
   _gameClearUI: {fileID: 454820799}
-  _delay: 3
+  _delay: 1
 --- !u!4 &1704255588
 Transform:
   m_ObjectHideFlags: 0
