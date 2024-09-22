@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private CameraManager _cameraManager; // CameraManagerのインスタンスを格納する変数
 
+    private int count;
+
     // Start is called before the first frame update
     void Start() //ゲームスタート時に１度だけ実行される
     {
@@ -45,6 +47,8 @@ public class Player : MonoBehaviour
         {
             _leftEdge = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x; // 画面左端の位置を計算
         }
+
+        count = 5;
     }
 
     // Update is called once per frame
@@ -137,7 +141,7 @@ public class Player : MonoBehaviour
             _spriteRenderer.color = new Color(color.r, color.g, color.b, 1.0f);
         }
         _spriteRenderer.color = color; //spriteRendererの色を元に戻す
-        gameObject.layer = LayerMask.NameToLayer("Default"); //playerのレイヤーをPlayerに変更
+        gameObject.layer = LayerMask.NameToLayer("Player"); //playerのレイヤーをPlayerに変更
     }
 
     private void _Dead()
@@ -176,16 +180,25 @@ public class Player : MonoBehaviour
 
     public GameObject bombPrefab; // プレハブを保持する公開フィールド
 
+
     private void Throw()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
+            if (count > 0)
+            {
             // プレイヤーの位置に投げるオブジェクトを生成
                 GameObject instantiatedBomb = Instantiate(bombPrefab);
                 instantiatedBomb.transform.position = transform.position;
                 Rigidbody2D bombRigid = instantiatedBomb.GetComponent<Rigidbody2D>();
                 Vector2 force = new Vector2(5.0f, 5.0f);
                 bombRigid.AddForce(force, ForceMode2D.Impulse);
+                count--;
+            }
        }
+    }
+    public int GetBomb()
+    {
+        return count;
     }
 }
