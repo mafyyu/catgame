@@ -8,76 +8,95 @@ public class bomb : MonoBehaviour
     [SerializeField, Header("爆発エフェクト")]
     public GameObject explosionEffect;
 
+    // 爆発の半径を指定する変数
+    [SerializeField, Header("爆発の半径")]
+    private float explosionRadius = 5.0f; // ここで大きめの半径を設定
+
     void OnCollisionEnter2D(Collision2D col)
     {
-        // 衝突対象が Enemy か Block タグを持つか確認
-        if (col.gameObject.tag == "Enemy")
-        {
-            // 敵を削除
-            Destroy(col.gameObject);
-        }
-        else if (col.gameObject.tag == "Block")
-        {
-            // Block タグの Tilemap を破壊する処理
-            HandleTilemapCollision(col);
-        }
-
+        // 爆発範囲内の敵とタイルを削除
+        Explode();
+        
         // 爆発エフェクトを生成して、爆弾自身を削除
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    // Tilemap の Block タイルを破壊する処理
-    void HandleTilemapCollision(Collision2D ot)
+    // 爆発範囲内の敵とタイルを削除する処理
+    void Explode()
     {
-        Tilemap tilemap = ot.gameObject.GetComponent<Tilemap>();
-        if (tilemap == null) return; // Tilemapがない場合は処理終了
+        // 1. 爆発範囲内の敵を削除
+        DestroyEnemiesInRadius();
 
-        Vector3 hitPos = Vector3.zero;
-        foreach (ContactPoint2D point in ot.contacts)
+        // 2. 爆発範囲内のタイルを削除
+        DestroyTilesInRadius();
+    }
+
+    // 爆発範囲内の敵を削除する処理
+    void DestroyEnemiesInRadius()
+    {
+        // Physics2D.OverlapCircleAllを使って、爆発範囲内の全てのCollider2Dを取得
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+
+        // 取得したCollider2Dの中でEnemyタグを持つオブジェクトを削除
+        foreach (var hitCollider in hitColliders)
         {
-            hitPos = point.point; // 衝突点を取得
-        }
-
-        var position = tilemap.cellBounds.allPositionsWithin;
-        var allPosition = new List<Vector3Int>();
-        int minPositionNum = 0;
-
-        foreach (var variable in position)
-        {
-            if (tilemap.GetTile(variable) != null)
+            if (hitCollider.CompareTag("Enemy"))
             {
-                allPosition.Add(variable);
+                // デバッグ: 敵が範囲内で検知されたことを確認
+                Debug.Log($"爆発範囲内の敵を削除: {hitCollider.gameObject.name}");
+                Destroy(hitCollider.gameObject);
             }
         }
+    }
 
-        if (allPosition.Count == 0) return;
-
-        // 衝突点に最も近いタイルを探す
-        for (int i = 1; i < allPosition.Count; i++)
+    // 爆発範囲内のタイルを削除する処理
+    void DestroyTilesInRadius()
+    {
+        // TilemapのBlockタイルの削除処理
+        Collider2D[] tileColliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (var hitCollider in tileColliders)
         {
-            if ((hitPos - allPosition[i]).magnitude <
-                (hitPos - allPosition[minPositionNum]).magnitude)
+            if (hitCollider.CompareTag("Block"))
             {
-                minPositionNum = i;
+                Tilemap tilemap = hitCollider.GetComponent<Tilemap>();
+                if (tilemap != null)
+                {
+                    Vector3 explosionCenter = transform.position;
+                    Vector3Int centerTilePos = tilemap.WorldToCell(explosionCenter);
+
+                    for (int x = -Mathf.CeilToInt(explosionRadius); x <= Mathf.CeilToInt(explosionRadius); x++)
+                    {
+                        for (int y = -Mathf.CeilToInt(explosionRadius); y <= Mathf.CeilToInt(explosionRadius); y++)
+                        {
+                            Vector3Int tilePos = new Vector3Int(centerTilePos.x + x, centerTilePos.y + y, centerTilePos.z);
+
+                            if (Vector3.Distance(tilemap.CellToWorld(tilePos), explosionCenter) <= explosionRadius)
+                            {
+                                if (tilemap.GetTile(tilePos) != null)
+                                {
+                                    tilemap.SetTile(tilePos, null);
+                                }
+                            }
+                        }
+                    }
+
+                    // TilemapCollider2D の再有効化（当たり判定の再構築）
+                    TilemapCollider2D tileCol = tilemap.GetComponent<TilemapCollider2D>();
+                    if (tileCol != null)
+                    {
+                        tileCol.enabled = false;
+                        tileCol.enabled = true;
+                    }
+                }
             }
         }
+    }
 
-        // 最終的に近いタイルの位置
-        Vector3Int finalPosition = allPosition[minPositionNum];
-
-        // タイルが存在する場合は削除
-        if (tilemap.GetTile(finalPosition) != null)
-        {
-            tilemap.SetTile(finalPosition, null); // タイルを削除
-
-            // TilemapCollider2D の再有効化（当たり判定の再構築）
-            TilemapCollider2D tileCol = ot.gameObject.GetComponent<TilemapCollider2D>();
-            if (tileCol != null)
-            {
-                tileCol.enabled = false;
-                tileCol.enabled = true;
-            }
-        }
+    // 爆発の範囲を視覚的に表示する（デバッグ用）
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius); // 爆発範囲を赤い円で表示
     }
 }
