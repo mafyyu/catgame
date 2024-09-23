@@ -9,6 +9,7 @@ TagManager:
   - Goal
   - Bomb
   - Block
+  - BlinkingText
   layers:
   - Default
   - TransparentFX
