@@ -12,7 +12,7 @@ public class MainManager : MonoBehaviour
     private GameObject _gameClearUI; // ゲームクリアの表示をするための変数
 
     [SerializeField, Header("Title画面に行くまでの時間")]
-    private float _delay;
+    public float _delay=3.0f; // タイトル画面に行くまでの時間を設定する変数
 
     private GameObject _player; // playerのオブジェクトを保持する変数
     private bool _bShowUI; // UIを表示するかどうかのフラグ
@@ -41,12 +41,12 @@ public class MainManager : MonoBehaviour
 
         yield return StartCoroutine(ReturnToTitleAfterDelay()); // タイトルシーンに戻る
     }
-
+    
     public IEnumerator _ShowGameClearUI() // ゲームクリアのUIを表示する処理
     {
         _gameClearUI.SetActive(true); // ゲームクリアのUIを表示
         _bShowUI = true;
-
+        
         yield return StartCoroutine(ReturnToTitleAfterDelay()); // タイトルシーンに戻る
     }
 
@@ -58,7 +58,9 @@ public class MainManager : MonoBehaviour
     
     public IEnumerator ReturnToTitleAfterDelay()
     {
+        Debug.Log("Waiting for " + _delay + " seconds.");
         yield return new WaitForSeconds(_delay); // 指定した秒数待機
         SceneManager.LoadScene("Title"); // タイトルシーンに戻る
     }
+    
 }
