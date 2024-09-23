@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Goal") //playerがゴールにぶつかった時
         {
-            FindObjectOfType<MainManager>()._ShowGameClearUI(); //MainManagerの_ShowGameClearUIメソッドを実行
+            StartCoroutine(FindObjectOfType<MainManager>()._ShowGameClearUI()); //MainManagerの_ShowGameClearUIメソッドを実行
             enabled = false; //playerのスクリプトを無効にする
             GetComponent<PlayerInput>().enabled = false; //PlayerInputのスクリプトを無効にする
             _cameraManager.scrollSpeed = 0.0f;

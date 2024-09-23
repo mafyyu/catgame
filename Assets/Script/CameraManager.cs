@@ -75,7 +75,7 @@ public class CameraManager : MonoBehaviour
         transform.position += new Vector3(scrollSpeed * Time.deltaTime, 0, 0);
 
         // デバッグ用にカメラの位置を表示
-        Debug.Log("Camera Position: " + transform.position + ", Scroll Speed: " + scrollSpeed);
+
     }
 
     
