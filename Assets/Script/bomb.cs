@@ -45,6 +45,7 @@ public class bomb : MonoBehaviour
             {
                 // デバッグ: 敵が範囲内で検知されたことを確認
                 Debug.Log($"爆発範囲内の敵を削除: {hitCollider.gameObject.name}");
+                ScoreManager.score_num += 1000;//スコアを10加算0
                 Destroy(hitCollider.gameObject);
             }
         }
@@ -76,6 +77,7 @@ public class bomb : MonoBehaviour
                                 if (tilemap.GetTile(tilePos) != null)
                                 {
                                     tilemap.SetTile(tilePos, null);
+                                    ScoreManager.score_num += 1500;
                                 }
                             }
                         }

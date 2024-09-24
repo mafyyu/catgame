@@ -48,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             Destroy(collision.gameObject); // 敵を削除する
+            ScoreManager.score_num += 10;
             Debug.Log("敵を削除しました"); // デバッグメッセージ
         }
     }
