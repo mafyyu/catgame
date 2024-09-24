@@ -46,20 +46,30 @@ public class MainManager : MonoBehaviour
     {
         _gameClearUI.SetActive(true); // ゲームクリアのUIを表示
         _bShowUI = true;
-        
+    
         yield return StartCoroutine(ReturnToTitleAfterDelay()); // タイトルシーンに戻る
     }
 
     public void OnReStart(InputAction.CallbackContext context) // ゲームを再スタートする処理
     {
         if (!_bShowUI || !context.performed) return;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 現在のシーンを再読み込み
+        SceneManager.LoadScene("Title");
     }
     
     public IEnumerator ReturnToTitleAfterDelay()
     {
-        Debug.Log("Waiting for " + _delay + " seconds.");
-        yield return new WaitForSeconds(_delay); // 指定した秒数待機
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            yield return new WaitForSeconds(_delay); // 指定した秒数待機
+            SceneManager.LoadScene("Title"); // タイトルシーンに戻る
+        }
+        // Debug.Log("Waiting for " + _delay + " seconds.");
+        // yield return new WaitForSeconds(_delay); // 指定した秒数待機
+        // SceneManager.LoadScene("Title"); // タイトルシーンに戻る
+    }
+
+    public void ReturnToTitle()
+    {
         SceneManager.LoadScene("Title"); // タイトルシーンに戻る
     }
     
