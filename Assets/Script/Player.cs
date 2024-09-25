@@ -151,7 +151,6 @@ public class Player : MonoBehaviour
         {
             _cameraManager.scrollSpeed = 0.0f; 
             Destroy(gameObject); //playerを消す
-            SceneManager.LoadScene("Title");
         }
     }
 
