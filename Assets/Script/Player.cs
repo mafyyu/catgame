@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
     void Update() //ゲームが動いている間ずっと実行される
     {
         _Move();
+        _LookMoveDirec();
 
         // 常に左端の位置を再計算する
         _leftEdge = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
@@ -84,6 +85,18 @@ public class Player : MonoBehaviour
         if (_bJump) return; //_bJumpがtrueの時はreturnより後の処理は行わない
         _rigid.velocity = new Vector2(_inputDirection.x * _moveSpeed, _rigid.velocity.y); //playerの速度 この状態だと上下には動くことはない
         _anim.SetBool("walk", _inputDirection.x != 0.0f); //playerが左右に動いている時にwalkをtrueにする
+    }
+
+    private void _LookMoveDirec()
+    {
+        if(_inputDirection.x > 0.0f)
+        {
+            transform.eulerAngles = Vector3.zero;
+        }
+        else if(_inputDirection.x <0.0f)
+        {
+            transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) //playerが何かにぶつかった時に実行される
