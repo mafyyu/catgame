@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _spriteRenderer; //SpriteRendererの変数を宣言
     private Animator _anim; //Animatorの変数を宣言
     private bool _bJump; //何回でもジャンプできるのを制御するための変数
+    public bool flag;
 
     // 追加した変数
     private Camera _mainCamera; // メインカメラを格納する変数
@@ -87,15 +88,18 @@ public class Player : MonoBehaviour
         _anim.SetBool("walk", _inputDirection.x != 0.0f); //playerが左右に動いている時にwalkをtrueにする
     }
 
-    private void _LookMoveDirec()
+    public void _LookMoveDirec()
     {
+        
         if(_inputDirection.x > 0.0f)
         {
             transform.eulerAngles = Vector3.zero;
+            flag = true;
         }
-        else if(_inputDirection.x <0.0f)
+        else if(_inputDirection.x < 0.0f)
         {
             transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+            flag = false;
         }
     }
 
@@ -200,14 +204,25 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             if (count > 0)
-            {
-            // プレイヤーの位置に投げるオブジェクトを生成
-                GameObject instantiatedBomb = Instantiate(bombPrefab);
-                instantiatedBomb.transform.position = transform.position;
-                Rigidbody2D bombRigid = instantiatedBomb.GetComponent<Rigidbody2D>();
-                Vector2 force = new Vector2(5.0f, 5.0f);
-                bombRigid.AddForce(force, ForceMode2D.Impulse);
-                count--;
+            {   // プレイヤーの位置に投げるオブジェクトを生成
+                if (flag == true)
+                {
+                    GameObject instantiatedBomb = Instantiate(bombPrefab);
+                    instantiatedBomb.transform.position = transform.position;
+                    Rigidbody2D bombRigid = instantiatedBomb.GetComponent<Rigidbody2D>();
+                    Vector2 force = new Vector2(5.0f, 5.0f);
+                    bombRigid.AddForce(force, ForceMode2D.Impulse);
+                    count--; 
+                }
+                else if (flag == false)
+                {
+                    GameObject instantiatedBomb = Instantiate(bombPrefab);
+                    instantiatedBomb.transform.position = transform.position;
+                    Rigidbody2D bombRigid = instantiatedBomb.GetComponent<Rigidbody2D>();
+                    Vector2 force = new Vector2(-5.0f, 5.0f);
+                    bombRigid.AddForce(force, ForceMode2D.Impulse);
+                    count--;
+                }
             }
        }
     }
