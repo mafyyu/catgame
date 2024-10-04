@@ -14,20 +14,22 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void _titleStart()
-    {
+        _titleStart();
     }
 
 
 
-    public void OnSpaceClick(InputAction.CallbackContext context) //スペースキーを押した時の処理
+
+    public void _titleStart() //スペースキーを押した時の処理
     {
-        if (context.performed)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SceneManager.LoadScene("Main");
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Main_2");
         }
     }
 }

@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
     void Update() //ゲームが動いている間ずっと実行される
     {
         _Move();
-        Debug.Log(_hp); //Unityのコンソールに_hpの値を表示
 
         // 常に左端の位置を再計算する
         _leftEdge = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x;
