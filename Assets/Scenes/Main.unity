@@ -1245,6 +1245,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: bb78e1e4-92f3-42f5-9af2-911a4b50a8e1
     m_ActionName: UI/ReStart[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 927ec3ea-11bb-4862-966c-aa6c0244ecb9
+    m_ActionName: UI/ReTitle[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1267,6 +1271,7 @@ MonoBehaviour:
   _hp: 5
   _damageTime: 3
   _flashTime: 0.1
+  flag: 0
   count: 5
   bombPrefab: {fileID: 8061811615982601486, guid: 232122707e1eb4330910e54c66895b32, type: 3}
 --- !u!95 &143556190
@@ -4971,7 +4976,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverUI: {fileID: 740399821}
   _gameClearUI: {fileID: 454820799}
-  _delay: 1
 --- !u!4 &1704255588
 Transform:
   m_ObjectHideFlags: 0
