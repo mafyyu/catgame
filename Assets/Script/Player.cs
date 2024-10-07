@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            enemy.GetComponent<Enemy>().PlayerDamage(this); //敵の頭上以外にplayerがぶつかった時ダメージを受ける
+            enemy.GetComponent<EnemyDamage>().PlayerDamage(this); //敵の頭上以外にplayerがぶつかった時ダメージを受ける
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); //playerが敵にぶつかった時のレイヤーをPlayerDamageに変更
             StartCoroutine(_Damage()); //コルーチンを実行
         }
