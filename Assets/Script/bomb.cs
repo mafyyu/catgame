@@ -41,7 +41,7 @@ public class bomb : MonoBehaviour
         // 取得したCollider2Dの中でEnemyタグを持つオブジェクトを削除
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            if (hitCollider.CompareTag("Enemy") || hitCollider.CompareTag("Bear"))
             {
                 // デバッグ: 敵が範囲内で検知されたことを確認
                 Debug.Log($"爆発範囲内の敵を削除: {hitCollider.gameObject.name}");

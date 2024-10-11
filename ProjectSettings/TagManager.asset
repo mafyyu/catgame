@@ -10,6 +10,7 @@ TagManager:
   - Bomb
   - Block
   - BlinkingText
+  - Bear
   layers:
   - Default
   - TransparentFX
