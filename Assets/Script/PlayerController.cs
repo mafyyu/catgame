@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // 接地判定
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor") || collision.gameObject.CompareTag("MoveFloor"))
         {
             isGrounded = true;
         }
