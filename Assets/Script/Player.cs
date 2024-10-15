@@ -114,6 +114,11 @@ public class Player : MonoBehaviour
         {
             _HitEnemy(collision.gameObject); //敵にぶつかった時の処理を実行
         }
+
+        if (collision.gameObject.tag == "Bear")
+        {
+            _HitBear(collision.gameObject);
+        }
         else if (collision.gameObject.tag == "Goal") //playerがゴールにぶつかった時
         {
             // StartCoroutine(FindObjectOfType<MainManager>()._ShowGameClearUI()); //MainManagerの_ShowGameClearUIメソッドを実行
@@ -140,6 +145,13 @@ public class Player : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); //playerが敵にぶつかった時のレイヤーをPlayerDamageに変更
             StartCoroutine(_Damage()); //コルーチンを実行
         }
+    }
+
+    private void _HitBear(GameObject Bear)
+    {
+        Bear.GetComponent<EnemyDamage>().PlayerDamage(this); //敵の頭上以外にplayerがぶつかった時ダメージを受ける
+        gameObject.layer = LayerMask.NameToLayer("PlayerDamage"); //playerが敵にぶつかった時のレイヤーをPlayerDamageに変更
+        StartCoroutine(_Damage()); //コルーチンを実行
     }
 
     public void attackEnemy(GameObject enemy)
