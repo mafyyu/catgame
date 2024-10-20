@@ -78,6 +78,7 @@ public class bomb : MonoBehaviour
                                 {
                                     tilemap.SetTile(tilePos, null);
                                     ScoreManager.score_num += 1500;
+                                    ScoreManager.dic["Block"] += 1500; //追加
                                 }
                             }
                         }

@@ -10,16 +10,40 @@ public class ScoreManager : MonoBehaviour {
     public GameObject score_clear = null; // TextまたはTextMeshProオブジェクト
     public static int score_num = 0; // スコア変数
 
+
+    public static Dictionary<string,int> dic = new Dictionary<string,int>()
+    {
+        {"Block",0},
+        {"Enemy",0},
+
+    };
+    public void LogDictionaryContents() //デバック用
+    {
+        // 辞書の内容を文字列に変換
+        string logMessage = "Dictionary Contents:\n";
+
+        foreach (var entry in dic)
+        {
+            logMessage += $"{entry.Key}: {entry.Value}\n"; // 各エントリを追加
+        }
+
+        // 1つのDebug.Log呼び出しで出力
+        Debug.Log(logMessage);
+    }
+
     // 初期化
     void Start () {
         if (score_object == null) {
             Debug.LogError("score_object is not assigned! Please assign it in the Inspector.");
         }
         score_num = 0;
+        dic["Block"] = 0;
+        dic["Enemy"] = 0;
     }
 
     // 更新
     void Update () {
+        LogDictionaryContents();
         if (score_object != null) {
             // TextMeshProUGUIコンポーネントを取得
             TextMeshProUGUI score_text = score_object.GetComponent<TextMeshProUGUI>();
