@@ -49,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
         {
             Destroy(collision.gameObject); // 敵を削除する
             ScoreManager.score_num += 10;
+            ScoreManager.dic["Enemy"]+= 10; //追加
             Debug.Log("敵を削除しました"); // デバッグメッセージ
         }
     }
