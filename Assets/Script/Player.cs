@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
         {
             Destroy(enemy); //敵を消す
             ScoreManager.score_num += 1000;//スコアを10加算
+            ScoreManager.dic["Enemy"]+= 1000; //追加
             _rigid.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Impulse); //敵を踏んだ時にジャンプする
         }
         else

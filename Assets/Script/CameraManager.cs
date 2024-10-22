@@ -61,13 +61,6 @@ public class CameraManager : MonoBehaviour
         transform.position = initPos; //カメラの位置を初期位置に戻す
     }
 
-    // private void _FollowPlayer()
-    // {
-    //     if (_player == null) return; //playerがnullの時は処理を行わない
-    //     float x = _player.transform.position.x; //playerのx座標を取得
-    //     x =Mathf.Clamp(x, _initPos.x, Mathf.Infinity); //x座標の移動範囲を制限
-    //     transform.position = new Vector3(x,transform.position.y, transform.position.z); //カメラの位置を更新
-    // }
 
     public void CameraScroll()
     {
