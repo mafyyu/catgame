@@ -20,16 +20,21 @@ public class TitleManager : MonoBehaviour
 
 
 
-    public void _titleStart() //スペースキーを押した時の処理
+    public void _titleStart() 
     {
+        // if (Input.GetKeyDown(KeyCode.Alpha1))
+        // {
+        //     SceneManager.LoadScene("Easy");
+        // }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Normal");
         }
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SceneManager.LoadScene("Main_2");
-        }
+        // else if (Input.GetKeyDown(KeyCode.Alpha3))
+        // {
+        //     SceneManager.LoadScene("Hard");
+        // }
     }
 }

@@ -77,7 +77,4 @@ public class CameraManager : MonoBehaviour
         // デバッグ用にカメラの位置を表示
 
     }
-
-    
-
 }
