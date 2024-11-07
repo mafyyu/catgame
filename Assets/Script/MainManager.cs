@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using unityroom.Api;
 
 public class MainManager : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class MainManager : MonoBehaviour
 
     private GameObject _player; // playerのオブジェクトを保持する変数
     private bool _bShowUI; // UIを表示するかどうかのフラグ
-
     // Start is called before the first frame update
     void Start()
     {
@@ -41,13 +41,16 @@ public class MainManager : MonoBehaviour
     {
         _gameOverUI.SetActive(true); // ゲームオーバーのUIを表示
         _bShowUI = true;
+        UnityroomApiClient.Instance.SendScore(1, ScoreManager.score_num, ScoreboardWriteMode.HighScoreDesc);
     }
     
     public void _ShowGameClearUI() // ゲームクリアのUIを表示する処理
     {
         _gameClearUI.SetActive(true); // ゲームクリアのUIを表示
         _bShowUI = true;
+        UnityroomApiClient.Instance.SendScore(1, ScoreManager.score_num, ScoreboardWriteMode.HighScoreDesc);
     }
+    
 
     public void OnReStart(InputAction.CallbackContext context) // ゲームを再スタートする処理
     {
