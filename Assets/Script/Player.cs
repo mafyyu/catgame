@@ -121,6 +121,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Goal") //playerがゴールにぶつかった時
         {
+            ScoreManager.score_num += 3000;
             // StartCoroutine(FindObjectOfType<MainManager>()._ShowGameClearUI()); //MainManagerの_ShowGameClearUIメソッドを実行
             FindObjectOfType<MainManager>()._ShowGameClearUI(); 
             enabled = false; //playerのスクリプトを無効にする
