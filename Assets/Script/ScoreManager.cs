@@ -8,10 +8,7 @@ public class ScoreManager : MonoBehaviour {
     public GameObject score_object = null; // TextまたはTextMeshProオブジェクト
     public GameObject score_over = null; // TextまたはTextMeshProオブジェクト
     public GameObject score_clear = null; // TextまたはTextMeshProオブジェクト
-    public GameObject score_over_block = null;
-    public GameObject score_over_enemy = null;
-    public GameObject score_clear_block = null;
-    public GameObject score_clear_enemy = null;
+
 
 
     public static int score_num = 0; // スコア変数
@@ -61,24 +58,9 @@ public class ScoreManager : MonoBehaviour {
             TextMeshProUGUI score_over_text = score_over.GetComponent<TextMeshProUGUI>();
             score_over_text.text = "Score: " + score_num;
 
-            TextMeshProUGUI score_over_text_block = score_over_block.GetComponent<TextMeshProUGUI>();
-            score_over_text_block.text = "Block: " + dic["Block"];
-
-            TextMeshProUGUI score_over_text_enemy = score_over_enemy.GetComponent<TextMeshProUGUI>();
-            score_over_text_enemy.text = "Enemy: " + dic["Enemy"];
-
-            
-
             TextMeshProUGUI score_clear_text = score_clear.GetComponent<TextMeshProUGUI>();
             score_clear_text.text = "Score: " + score_num;
-
-            TextMeshProUGUI score_clear_text_block = score_clear_block.GetComponent<TextMeshProUGUI>();
-            score_clear_text_block.text = "Block: " + dic["Block"];
-
-            TextMeshProUGUI score_clear_text_enemy = score_clear_enemy.GetComponent<TextMeshProUGUI>();
-            score_clear_text_enemy.text = "Enemy: " + dic["Enemy"];
         }
-        
     }
 
 
