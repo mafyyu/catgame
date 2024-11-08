@@ -41,7 +41,6 @@ public class MainManager : MonoBehaviour
     {
         _gameOverUI.SetActive(true); // ゲームオーバーのUIを表示
         _bShowUI = true;
-        UnityroomApiClient.Instance.SendScore(1, ScoreManager.score_num, ScoreboardWriteMode.HighScoreDesc);
     }
     
     public void _ShowGameClearUI() // ゲームクリアのUIを表示する処理
