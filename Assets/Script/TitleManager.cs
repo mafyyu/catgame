@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene("Normal");
+            SceneManager.LoadScene("Main");
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha1))
