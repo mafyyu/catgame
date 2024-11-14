@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedChange : MonoBehaviour
+public class SpeedChange_First : MonoBehaviour
 {
     private CameraManager _cameraManager;
     [SerializeField, Header("カメラのスピード変更")]
     private float cameraChangeSpeed;
-    [SerializeField] GameObject Stop;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +26,6 @@ public class SpeedChange : MonoBehaviour
         {
            _cameraManager.scrollSpeed = 3.0f;
            Debug.Log("SpeedChange");
-           Stop.GetComponent<Stop>().enabled = false;
         } 
     }
 }

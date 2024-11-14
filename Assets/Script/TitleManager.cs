@@ -27,14 +27,14 @@ public class TitleManager : MonoBehaviour
         //     SceneManager.LoadScene("Easy");
         // }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SceneManager.LoadScene("Normal");
         }
 
-        // else if (Input.GetKeyDown(KeyCode.Alpha3))
-        // {
-        //     SceneManager.LoadScene("Hard");
-        // }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene("Tutorial");
+        }
     }
 }
